@@ -1,7 +1,5 @@
 package com.hexl.testpine;
 
-import static top.canyie.pine.xposed.PineXposed.loadOpenedModule;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -148,6 +146,6 @@ public class PineXposedExt {
         String modulePath = module.getAbsolutePath();
         ModuleClassLoader mcl = new ModuleClassLoader(modulePath, nativePath, initCl);
         Utils.logD("  new ModuleClassLoader = " + mcl);
-        loadOpenedModule(modulePath, mcl, startsSystemServer);
+        PineXposed.loadOpenedModule(modulePath, mcl, startsSystemServer);
     }
 }
