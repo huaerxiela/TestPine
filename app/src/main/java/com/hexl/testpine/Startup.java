@@ -9,6 +9,7 @@ import java.util.Objects;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
+import top.canyie.pine.PineConfig;
 
 public class Startup {
 
@@ -54,7 +55,7 @@ public class Startup {
     private static void startBootstrapHook(boolean isSystem){
         Utils.logD("startBootstrapHook1");
         try {
-//            PineConfig.debuggable = true;
+            PineConfig.debuggable = true;
 
             XposedHelpers.findAndHookConstructor(Class.forName("android.app.LoadedApk"),
                     Class.forName("android.app.ActivityThread"), ApplicationInfo.class, Class.forName("android.content.res.CompatibilityInfo"),
