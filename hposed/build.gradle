@@ -1,0 +1,76 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+android {
+    compileSdk 32
+    namespace "top.hexl.pine.hposed"
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs += ['src/main/apacheCommonsLang']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/**'
+            excludes += '/*.properties'
+        }
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly 'top.canyie.pine:core:0.2.7'
+}
+
+//publishing {
+//    publications {
+//        mavenJava(MavenPublication) {
+//            group rootProject.groupId
+//            artifactId 'xposed'
+//            version '0.0.9'
+//            // the components are created only during the afterEvaluate phase
+//            afterEvaluate {
+//                from components.release
+//            }
+//            pom {
+//                name = rootProject.repoName
+//                description = 'pine hook xposed compat'
+//                url = rootProject.website
+//                licenses rootProject.licenses
+//                developers rootProject.developers
+//                scm rootProject.scm
+//            }
+//        }
+//    }
+//    repositories rootProject.uploadRepositories
+//}
+//
+//signing {
+//    sign publishing.publications.mavenJava
+//}

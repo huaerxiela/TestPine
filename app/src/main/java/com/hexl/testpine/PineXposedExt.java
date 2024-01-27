@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.canyie.pine.PineConfig;
-import top.canyie.pine.xposed.ModuleClassLoader;
-import top.canyie.pine.xposed.PineXposed;
+import top.hexl.pine.hposed.ModuleClassLoader;
+import top.hexl.pine.hposed.PineHposed;
 
 public class PineXposedExt {
 
@@ -104,7 +104,7 @@ public class PineXposedExt {
         String processName = getCurrentProcessName(appInfo);
         ClassLoader classLoader = context.getClassLoader();
 
-        PineXposed.onPackageLoad(packageName, processName, appInfo, isFirstApp, classLoader);
+        PineHposed.onPackageLoad(packageName, processName, appInfo, isFirstApp, classLoader);
     }
 
     public static boolean isApkInDebug(Context context) {
@@ -142,10 +142,10 @@ public class PineXposedExt {
             Utils.logE("  File " + module + " does not exist");
             return;
         }
-        ClassLoader initCl = PineXposed.class.getClassLoader();
+        ClassLoader initCl = PineHposed.class.getClassLoader();
         String modulePath = module.getAbsolutePath();
         ModuleClassLoader mcl = new ModuleClassLoader(modulePath, nativePath, initCl);
         Utils.logD("  new ModuleClassLoader = " + mcl);
-        PineXposed.loadOpenedModule(modulePath, mcl, startsSystemServer);
+        PineHposed.loadOpenedModule(modulePath, mcl, startsSystemServer);
     }
 }

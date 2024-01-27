@@ -7,8 +7,8 @@ import android.content.pm.ApplicationInfo;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
-import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedHelpers;
+import de.hexl.android.hposed.HC_MethodHook;
+import de.hexl.android.hposed.HposedHelpers;
 import top.canyie.pine.PineConfig;
 
 public class Startup {
@@ -57,10 +57,10 @@ public class Startup {
         try {
             PineConfig.debuggable = true;
 
-            XposedHelpers.findAndHookConstructor(Class.forName("android.app.LoadedApk"),
+            HposedHelpers.findAndHookConstructor(Class.forName("android.app.LoadedApk"),
                     Class.forName("android.app.ActivityThread"), ApplicationInfo.class, Class.forName("android.content.res.CompatibilityInfo"),
                     ClassLoader.class, boolean.class, boolean.class, boolean.class,
-                    new XC_MethodHook() {
+                    new HC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                             super.afterHookedMethod(param);
