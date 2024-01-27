@@ -14,3 +14,5 @@
 .cxx
 local.properties
 /binary
+hposed/build
+app/build
